@@ -1,0 +1,156 @@
+body { 
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #0d1117;
+    color: #f0f6fc;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3 {
+    color: #ffd43b;
+}
+
+.sidebar {
+    background-color: #0d1117;
+    color: #f0f6fc;
+    padding: 20px 0;
+    width: 230px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    border-right: 3px solid #ffd43b;
+}
+
+.menu-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffd43b;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.accordion {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.accordion-item {
+    margin-bottom: 15px;
+}
+
+.accordion-toggle {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    color: #ffd43b;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: left;
+    padding: 6px 0;
+    cursor: pointer;
+}
+
+.accordion-content {
+    display: none;
+    flex-direction: column;
+    padding-left: 10px;
+    margin-top: 5px;
+}
+
+.accordion-item.active .accordion-content {
+    display: flex;
+}
+
+.accordion-content a {
+    color: #58a6ff;
+    text-decoration: none;
+    margin: 3px 0;
+    font-size: 13px;
+}
+
+.accordion-content a:hover {
+    text-decoration: underline;
+}
+
+/* Botón de cerrar sesión */
+.logout-button {
+    margin: 10px 20px 20px 20px;
+    padding: 10px 15px;
+    background-color: #ffd43b;
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #ffdd55;
+}
+
+.logout-button i {
+    margin-right: 6px;
+}
+
+/* Página login - estilo centrado */
+body.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    max-width: 400px;
+    padding: 40px;
+    background-color: #161b22;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #ffd43b66;
+    text-align: center;
+}
+
+.login-form .input-field {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    background-color: #0d1117;
+    color: #f0f6fc;
+    border: 1px solid #30363d;
+    border-radius: 5px;
+}
+
+.login-form .submit-button {
+    background-color: #ffd43b;
+    color: #000;
+    border: none;
+    padding: 10px 15px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.login-form .submit-button:hover {
+    background-color: #ffdd55;
+}
+
+.error-message {
+    color: #ff4d4f;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.content {
+    padding: 30px;
+    text-align: center;
+    margin-left: 230px; /* espacio lateral para el menú */
+}
