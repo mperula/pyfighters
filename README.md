@@ -100,7 +100,7 @@ git clone https://github.com/mperula/pyfighters
 ## Modo friki activado
 
 > "En PyFighters no compilas para sobrevivir. Compilas para vencer."
-> Manual del Código Ninja, página 42
+> - Manual del Código Ninja, página 42
 
 ---
 
