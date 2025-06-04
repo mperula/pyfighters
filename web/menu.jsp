@@ -44,7 +44,15 @@
             <button class="accordion-toggle">⚔️ Matches</button>
             <div class="accordion-content">
                 <a href="#">Crear Combate</a>
+                <a href="#">Eliminar Combate</a>
+                <a href="#">Modificar Combate</a>
+                <a href="#">Ver todos los Combates</a>
+                <a href="#">Buscar Combate</a>
+                <a href="#">Crear Resultado</a>
+                <a href="#">Modificar resultado</a>
+                <a href="#">Eliminar Resultado</a>
                 <a href="#">Resultados</a>
+                <a href="#">Buscar Resultado</a>
             </div>
         </div>
 
