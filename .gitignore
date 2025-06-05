@@ -40,3 +40,6 @@ secrets/
 # Librerías descargadas localmente (si no usas Maven/Gradle)
 lib/
 libs/
+nbproject/private/private.properties
+/nbproject/private
+/nbproject/private
