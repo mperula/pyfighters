@@ -4,10 +4,12 @@
  */
 package com.myapp.struts;
 
-import com.myapp.struts.model.Match;
+import com.myapp.struts.dao.BaseDAO;
 import com.myapp.struts.dao.MatchDAO;
+import com.myapp.struts.model.Match;
 import com.opensymphony.xwork2.ActionSupport;
-import java.util.Date;
+
+import java.sql.Connection;
 import java.util.List;
 
 public class MatchAction extends ActionSupport {
@@ -15,9 +17,11 @@ public class MatchAction extends ActionSupport {
     private Match match;
     private List<Match> matches;
     private int matchId;
-    private Date fecha;
-    private int fighter1Id;
-    private int fighter2Id;
+
+    // Getters y Setters
+    public Match getMatch() {
+        return match;
+    }
 
     public void setMatch(Match match) {
         this.match = match;
@@ -39,58 +43,78 @@ public class MatchAction extends ActionSupport {
         this.matchId = matchId;
     }
 
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public int getFighter1Id() {
-        return fighter1Id;
-    }
-
-    public void setFighter1Id(int fighter1Id) {
-        this.fighter1Id = fighter1Id;
-    }
-
-    public int getFighter2Id() {
-        return fighter2Id;
-    }
-
-    public void setFighter2Id(int fighter2Id) {
-        this.fighter2Id = fighter2Id;
-    }
-
-    public String createMatch() {
-        // Aquí iría la lógica para crear un Match
-        return SUCCESS;
-    }
-
-    public String updateMatch() {
-        // Aquí iría la lógica para actualizar un Match
-        return SUCCESS;
-    }
-
-    public String deleteMatch() {
-        // Aquí iría la lógica para eliminar un Match
-        return SUCCESS;
-    }
-
-    public String getMatch() {
-        // Aquí iría la lógica para obtener un Match por ID
-        return SUCCESS;
-    }
-
+    // Listar todos los combates
     public String listMatches() {
-        // Aquí iría la lógica para listar todos los Matches
-        return SUCCESS;
+        try (Connection conn = BaseDAO.getConnection()) {
+            MatchDAO matchDAO = new MatchDAO(conn);
+            matches = matchDAO.getAllMatches();
+            return SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Error al listar combates: " + e.getMessage());
+            return ERROR;
+        }
     }
 
-    public String searchMatches() {
-        // Aquí iría la lógica para buscar Matches por fecha o luchadores
-        return SUCCESS;
+    // Obtener detalles de un combate por ID
+    public String getMatchDetails() {
+        try (Connection conn = BaseDAO.getConnection()) {
+            MatchDAO matchDAO = new MatchDAO(conn);
+            match = matchDAO.getMatch(matchId);
+            if (match != null) {
+                return SUCCESS;
+            } else {
+                addActionError("No se encontró el combate con el ID proporcionado.");
+                return ERROR;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Error al obtener detalles del combate: " + e.getMessage());
+            return ERROR;
+        }
     }
 
+    // Crear nuevo combate
+    public String createMatch() {
+        try (Connection conn = BaseDAO.getConnection()) {
+            MatchDAO matchDAO = new MatchDAO(conn);
+            matchDAO.createMatch(match);
+            return SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Error al crear combate: " + e.getMessage());
+            return ERROR;
+        }
+    }
+
+    // Actualizar un combate existente
+    public String updateMatch() {
+        try (Connection conn = BaseDAO.getConnection()) {
+            MatchDAO matchDAO = new MatchDAO(conn);
+            matchDAO.updateMatch(match);
+            return SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Error al actualizar combate: " + e.getMessage());
+            return ERROR;
+        }
+    }
+
+    // Eliminar un combate
+    public String deleteMatch() {
+        try (Connection conn = BaseDAO.getConnection()) {
+            MatchDAO matchDAO = new MatchDAO(conn);
+            matchDAO.deleteMatch(match.getMatchId());
+            return SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Error al eliminar combate: " + e.getMessage());
+            return ERROR;
+        }
+    }
+
+    // Método para buscar un combate por ID (igual que getMatchDetails, pero más semántico)
+    public String getMatchById() {
+        return getMatchDetails();
+    }
 }

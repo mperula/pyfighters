@@ -43,18 +43,19 @@
         <div class="accordion-item">
             <button class="accordion-toggle">⚔️ Matches</button>
             <div class="accordion-content">
-                <a href="#">Crear Combate</a>
-                <a href="#">Eliminar Combate</a>
-                <a href="#">Modificar Combate</a>
-                <a href="#">Ver todos los Combates</a>
-                <a href="#">Buscar Combate</a>
-                <a href="#">Crear Resultado</a>
-                <a href="#">Modificar resultado</a>
-                <a href="#">Eliminar Resultado</a>
-                <a href="#">Resultados</a>
-                <a href="#">Buscar Resultado</a>
+                <a href="AddMatch.jsp">Crear Combate</a>
+                <a href="DeleteMatch.jsp">Eliminar Combate</a>
+                <a href="UpdateMatch.jsp">Modificar Combate</a>
+                <a href="Matches.jsp">Ver todos los Combates</a>
+                <a href="SearchMatch.jsp">Buscar Combate</a>
+                <a href="AddResult.jsp">Crear Resultado</a>
+                <a href="UpdateResult.jsp">Modificar resultado</a>
+                <a href="DeleteResult.jsp">Eliminar Resultado</a>
+                <a href="Results.jsp">Resultados</a>
+                <a href="SearchResult.jsp">Buscar Resultado</a>
             </div>
         </div>
+
 
         <div class="accordion-item">
             <button class="accordion-toggle">🏆 Torneos</button>

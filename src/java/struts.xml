@@ -17,5 +17,48 @@ and open the template in the editor.
             <result name="success">home.jsp</result>
             <result name="error" type="dispatcher">login.jsp</result>
         </action>
+        
+        <action name="matches" class="com.myapp.struts.MatchAction" method="listMatches">
+            <result name="success">Matches.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="getMatch" class="com.myapp.struts.MatchAction" method="getMatch">
+            <result name="success">GetMatch.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="addMatchForm">
+            <result name="success">AddMatch.jsp</result>
+        </action>
+
+        <action name="createMatch" class="com.myapp.struts.MatchAction" method="createMatch">
+            <result name="success" type="redirect">matches.action</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="updateMatchForm" class="com.myapp.struts.MatchAction" method="getMatch">
+            <result name="success">UpdateMatch.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="updateMatch" class="com.myapp.struts.MatchAction" method="updateMatch">
+            <result name="success" type="redirect">matches.action</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="deleteMatchConfirm" class="com.myapp.struts.MatchAction" method="getMatch">
+            <result name="success">DeleteMatch.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="deleteMatch" class="com.myapp.struts.MatchAction" method="deleteMatch">
+            <result name="success" type="redirect">matches.action</result>
+            <result name="error">error.jsp</result>
+        </action>
+        <action name="getMatchById" class="com.myapp.struts.action.MatchAction" method="getMatchById">
+            <result name="success">/SearchMatch.jsp</result>
+            <result name="error">/SearchMatch.jsp</result>
+        </action>
     </package>
 </struts>
