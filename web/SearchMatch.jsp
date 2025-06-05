@@ -15,24 +15,26 @@
         <link rel="stylesheet" type="text/css" href="css/match.css">
     </head>
     <body>
-        <h2>Buscar Combate por ID</h2>
-        <s:form action="getMatchById">
-            <s:textfield name="matchId" label="ID del combate"/>
-            <s:submit value="Buscar"/>
-        </s:form>
+        <div class="content">
+            <h2>Buscar Combate por ID</h2>
+            <s:form action="getMatchById">
+                <s:textfield name="matchId" label="ID del combate"/>
+                <s:submit value="Buscar"/>
+            </s:form>
 
-        <s:if test="match != null">
-            <h3>Datos del Combate:</h3>
-            <p>ID: <s:property value="match.matchId"/></p>
-            <p>Fecha: <s:property value="match.date"/></p>
-            <p>Luchador 1: <s:property value="match.fighter1Name"/></p>
-            <p>Luchador 2: <s:property value="match.fighter2Name"/></p>
-            <p>Arena: <s:property value="match.arenaName"/></p>
-            <p>Resultado: <s:property value="match.result"/></p>
-        </s:if>
+            <s:if test="match != null">
+                <h3>Datos del Combate:</h3>
+                <p>ID: <s:property value="match.matchId"/></p>
+                <p>Fecha: <s:property value="match.date"/></p>
+                <p>Luchador 1: <s:property value="match.fighter1Name"/></p>
+                <p>Luchador 2: <s:property value="match.fighter2Name"/></p>
+                <p>Arena: <s:property value="match.arenaName"/></p>
+                <p>Resultado: <s:property value="match.result"/></p>
+            </s:if>
 
-        <s:if test="match == null">
-            <p>No se encontró ningún combate con ese ID.</p>
-        </s:if>
+            <s:if test="match == null">
+                <p>No se encontró ningún combate con ese ID.</p>
+            </s:if>
+        </div>
     </body>
 </html>

@@ -8,13 +8,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Agregar Combate</title>
+        <title>Agregar Resultado</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <link rel="stylesheet" type="text/css" href="css/match.css">
     </head>
     <body>
         <div class="content">
-            <h1>Agregar Nuevo Combate</h1>
+            <h1>Agregar Nuevo Resultado</h1>
 
             <s:if test="hasActionErrors()">
                 <div class="error-message">
@@ -22,38 +21,36 @@
                 </div>
             </s:if>
 
-            <s:form action="createMatch" method="post">
+            <s:form action="createResult" method="post">
+                <s:select 
+                    name="result.matchId" 
+                    label="Combate"
+                    list="matchOptions"
+                    listKey="key"
+                    listValue="value" />
 
                 <s:select 
-                    name="fighter1Id" 
-                    label="Luchador 1"
+                    name="result.winnerId" 
+                    label="Ganador"
                     list="fighterOptions"
                     listKey="key"
                     listValue="value" />
 
                 <s:select 
-                    name="fighter2Id"
-                    label="Luchador 2"
+                    name="result.loserId" 
+                    label="Perdedor"
                     list="fighterOptions"
                     listKey="key"
                     listValue="value" />
 
-                <s:select 
-                    name="arenaId"
-                    label="Arena"
-                    list="arenaOptions"
-                    listKey="key"
-                    listValue="value" />
+                <s:checkbox 
+                    name="result.isDraw" 
+                    label="¿Empate?" />
 
-                <s:textfield name="result" label="Resultado"/>
-                <s:textfield name="date" label="Fecha (YYYY-MM-DD)"/>
-                <s:submit value="Agregar Combate"/>
-
+                <s:submit value="Guardar Resultado"/>
             </s:form>
 
-
-            <a href="matches.action">Cancelar</a>
+            <a href="results.action">Cancelar</a>
         </div>
     </body>
 </html>
-

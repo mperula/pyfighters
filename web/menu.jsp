@@ -43,16 +43,12 @@
         <div class="accordion-item">
             <button class="accordion-toggle">⚔️ Matches</button>
             <div class="accordion-content">
-                <a href="AddMatch.jsp">Crear Combate</a>
-                <a href="DeleteMatch.jsp">Eliminar Combate</a>
-                <a href="UpdateMatch.jsp">Modificar Combate</a>
-                <a href="Matches.jsp">Ver todos los Combates</a>
-                <a href="SearchMatch.jsp">Buscar Combate</a>
-                <a href="AddResult.jsp">Crear Resultado</a>
-                <a href="UpdateResult.jsp">Modificar resultado</a>
-                <a href="DeleteResult.jsp">Eliminar Resultado</a>
-                <a href="Results.jsp">Resultados</a>
-                <a href="SearchResult.jsp">Buscar Resultado</a>
+                <a href="matches.action">Ver todos los Combates</a>
+                <a href="addMatchForm.action">Crear Combate</a>
+                <a href="getMatchById.action">Buscar Combate</a>
+                <a href="results.action">Ver Resultados</a>
+                <a href="addResultForm.action">Crear Resultado</a>
+                <a href="searchResults.action">Buscar Resultado</a>
             </div>
         </div>
 

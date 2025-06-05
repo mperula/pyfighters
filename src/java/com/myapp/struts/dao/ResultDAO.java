@@ -2,45 +2,167 @@
  *
  * @author pablo
  */
-
 package com.myapp.struts.dao;
 
 import com.myapp.struts.model.Result;
-import java.util.List;
+
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ResultDAO extends BaseDAO {
 
-    // Crear resultado
-    public void createResult(Result result) throws Exception {
-        // TODO: Implementar lógica para insertar un resultado
+    private final Connection conn;
+
+    public ResultDAO(Connection conn) {
+        this.conn = conn;
     }
 
-    // Modificar resultado
-    public void updateResult(Result result) throws Exception {
-        // TODO: Implementar lógica para actualizar un resultado
+    public void createResult(Result result) throws SQLException {
+        String sql = "INSERT INTO Results (match_id, winner_id, loser_id, is_draw) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, result.getMatchId());
+            if (result.getWinnerId() != 0) {
+                stmt.setInt(2, result.getWinnerId());
+            } else {
+                stmt.setNull(2, Types.INTEGER);
+            }
+
+            if (result.getLoserId() != 0) {
+                stmt.setInt(3, result.getLoserId());
+            } else {
+                stmt.setNull(3, Types.INTEGER);
+            }
+
+            stmt.setInt(4, result.isDraw());  // Aquí corregido: usamos setInt
+            stmt.executeUpdate();
+        }
     }
 
-    // Eliminar resultado por ID
-    public void deleteResult(int resultId) throws Exception {
-        // TODO: Implementar lógica para eliminar un resultado
+    public void updateResult(Result result) throws SQLException {
+        String sql = "UPDATE Results SET winner_id = ?, loser_id = ?, is_draw = ? WHERE result_id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            if (result.getWinnerId() != 0) {
+                stmt.setInt(1, result.getWinnerId());
+            } else {
+                stmt.setNull(1, Types.INTEGER);
+            }
+
+            if (result.getLoserId() != 0) {
+                stmt.setInt(2, result.getLoserId());
+            } else {
+                stmt.setNull(2, Types.INTEGER);
+            }
+
+            stmt.setInt(3, result.isDraw());  // Aquí corregido
+            stmt.setInt(4, result.getResultId());
+            stmt.executeUpdate();
+        }
     }
 
-    // Obtener resultado por ID
-    public Result getResult(int resultId) throws Exception {
-        // TODO: Implementar lógica para obtener un resultado
+    public void deleteResult(int resultId) throws SQLException {
+        String sql = "DELETE FROM Results WHERE result_id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, resultId);
+            stmt.executeUpdate();
+        }
+    }
+
+    public Result getResult(int resultId) throws SQLException {
+        String sql = "SELECT r.*, fw.username AS winner_name, fl.username AS loser_name "
+                + "FROM Results r "
+                + "LEFT JOIN Fighters fw ON r.winner_id = fw.fighter_id "
+                + "LEFT JOIN Fighters fl ON r.loser_id = fl.fighter_id "
+                + "WHERE r.result_id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, resultId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    Result r = new Result();
+                    r.setResultId(rs.getInt("result_id"));
+                    r.setMatchId(rs.getInt("match_id"));
+                    r.setWinnerId(rs.getInt("winner_id"));
+                    r.setLoserId(rs.getInt("loser_id"));
+                    r.setDraw(rs.getInt("is_draw"));  // Aquí corregido
+                    r.setCreatedAt(rs.getTimestamp("created_at"));
+                    r.setUpdatedAt(rs.getTimestamp("updated_at"));
+                    r.setWinnerName(rs.getString("winner_name"));
+                    r.setLoserName(rs.getString("loser_name"));
+                    return r;
+                }
+            }
+        }
         return null;
     }
 
-    // Listar todos los resultados
-    public List<Result> listResults() throws Exception {
-        // TODO: Implementar lógica para listar todos los resultados
-        return new ArrayList<>();
+    public List<Result> listResults() throws SQLException {
+        List<Result> results = new ArrayList<>();
+        String sql = "SELECT r.*, fw.username AS winner_name, fl.username AS loser_name "
+                + "FROM Results r "
+                + "LEFT JOIN Fighters fw ON r.winner_id = fw.fighter_id "
+                + "LEFT JOIN Fighters fl ON r.loser_id = fl.fighter_id "
+                + "ORDER BY r.created_at DESC";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Result r = new Result();
+                r.setResultId(rs.getInt("result_id"));
+                r.setMatchId(rs.getInt("match_id"));
+                r.setWinnerId(rs.getInt("winner_id"));
+                r.setLoserId(rs.getInt("loser_id"));
+                r.setDraw(rs.getInt("is_draw"));  // Aquí corregido
+                r.setCreatedAt(rs.getTimestamp("created_at"));
+                r.setUpdatedAt(rs.getTimestamp("updated_at"));
+                r.setWinnerName(rs.getString("winner_name"));
+                r.setLoserName(rs.getString("loser_name"));
+                results.add(r);
+            }
+        }
+        return results;
     }
 
-    // Buscar resultados por luchador o arena
-    public List<Result> searchResults(Integer fighterId, Integer arenaId) throws Exception {
-        // TODO: Implementar lógica para buscar resultados por luchador o arena
-        return new ArrayList<>();
+    public List<Result> searchResults(Integer fighterId, Integer arenaId) throws SQLException {
+        List<Result> results = new ArrayList<>();
+        StringBuilder sql = new StringBuilder(
+                "SELECT r.*, fw.username AS winner_name, fl.username AS loser_name "
+                + "FROM Results r "
+                + "LEFT JOIN Fighters fw ON r.winner_id = fw.fighter_id "
+                + "LEFT JOIN Fighters fl ON r.loser_id = fl.fighter_id "
+                + "JOIN Matches m ON r.match_id = m.match_id WHERE 1=1 "
+        );
+
+        List<Object> params = new ArrayList<>();
+        if (fighterId != null) {
+            sql.append("AND (r.winner_id = ? OR r.loser_id = ?) ");
+            params.add(fighterId);
+            params.add(fighterId);
+        }
+        if (arenaId != null) {
+            sql.append("AND m.arena_id = ? ");
+            params.add(arenaId);
+        }
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql.toString())) {
+            for (int i = 0; i < params.size(); i++) {
+                stmt.setObject(i + 1, params.get(i));
+            }
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Result r = new Result();
+                    r.setResultId(rs.getInt("result_id"));
+                    r.setMatchId(rs.getInt("match_id"));
+                    r.setWinnerId(rs.getInt("winner_id"));
+                    r.setLoserId(rs.getInt("loser_id"));
+                    r.setDraw(rs.getInt("is_draw"));  // Aquí corregido
+                    r.setCreatedAt(rs.getTimestamp("created_at"));
+                    r.setUpdatedAt(rs.getTimestamp("updated_at"));
+                    r.setWinnerName(rs.getString("winner_name"));
+                    r.setLoserName(rs.getString("loser_name"));
+                    results.add(r);
+                }
+            }
+        }
+        return results;
     }
 }

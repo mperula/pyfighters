@@ -7,14 +7,19 @@ package com.myapp.struts.model;
 import java.sql.Timestamp;
 
 public class Result {
+
     private int resultId;
     private int matchId;
     private int winnerId;
     private int loserId;
-    private boolean isDraw;
+    private int isDraw;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
+    private String winnerName;
+    private String loserName;
+
+    // Getters y setters
     public int getResultId() {
         return resultId;
     }
@@ -47,12 +52,12 @@ public class Result {
         this.loserId = loserId;
     }
 
-    public boolean isDraw() {
+    public int isDraw() {
         return isDraw;
     }
 
-    public void setDraw(boolean draw) {
-        isDraw = draw;
+    public void setDraw(int isDraw) {
+        this.isDraw = isDraw;
     }
 
     public Timestamp getCreatedAt() {
@@ -69,5 +74,21 @@ public class Result {
 
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getWinnerName() {
+        return winnerName;
+    }
+
+    public void setWinnerName(String winnerName) {
+        this.winnerName = winnerName;
+    }
+
+    public String getLoserName() {
+        return loserName;
+    }
+
+    public void setLoserName(String loserName) {
+        this.loserName = loserName;
     }
 }

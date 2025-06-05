@@ -18,36 +18,36 @@ and open the template in the editor.
             <result name="error" type="dispatcher">login.jsp</result>
         </action>
         
+        
         <action name="matches" class="com.myapp.struts.MatchAction" method="listMatches">
             <result name="success">Matches.jsp</result>
             <result name="error">error.jsp</result>
         </action>
 
-        <action name="getMatch" class="com.myapp.struts.MatchAction" method="getMatch">
+        <action name="getMatch" class="com.myapp.struts.MatchAction" method="getMatchDetails">
             <result name="success">GetMatch.jsp</result>
             <result name="error">error.jsp</result>
         </action>
 
-        <action name="addMatchForm">
-            <result name="success">AddMatch.jsp</result>
-        </action>
-
         <action name="createMatch" class="com.myapp.struts.MatchAction" method="createMatch">
             <result name="success" type="redirect">matches.action</result>
+            <result name="input">AddMatch.jsp</result> <!-- Para cuando falle y vuelva a mostrar el form -->
             <result name="error">error.jsp</result>
         </action>
 
-        <action name="updateMatchForm" class="com.myapp.struts.MatchAction" method="getMatch">
+        <action name="updateMatchForm" class="com.myapp.struts.MatchAction" method="getMatchDetails">
             <result name="success">UpdateMatch.jsp</result>
             <result name="error">error.jsp</result>
         </action>
 
         <action name="updateMatch" class="com.myapp.struts.MatchAction" method="updateMatch">
             <result name="success" type="redirect">matches.action</result>
+            <result name="input">UpdateMatch.jsp</result>
             <result name="error">error.jsp</result>
         </action>
 
-        <action name="deleteMatchConfirm" class="com.myapp.struts.MatchAction" method="getMatch">
+
+        <action name="deleteMatchConfirm" class="com.myapp.struts.MatchAction" method="getMatchDetails">
             <result name="success">DeleteMatch.jsp</result>
             <result name="error">error.jsp</result>
         </action>
@@ -56,9 +56,62 @@ and open the template in the editor.
             <result name="success" type="redirect">matches.action</result>
             <result name="error">error.jsp</result>
         </action>
-        <action name="getMatchById" class="com.myapp.struts.action.MatchAction" method="getMatchById">
-            <result name="success">/SearchMatch.jsp</result>
-            <result name="error">/SearchMatch.jsp</result>
+
+        <action name="getMatchById" class="com.myapp.struts.MatchAction" method="getMatchById">
+            <result name="success">SearchMatch.jsp</result>
+            <result name="error">SearchMatch.jsp</result>
         </action>
+
+        <action name="addMatchForm" class="com.myapp.struts.MatchAction" method="addMatchForm">
+            <result name="success">AddMatch.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+        <action name="results" class="com.myapp.struts.ResultAction" method="listResults">
+            <result name="success">Results.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="addResultForm" class="com.myapp.struts.ResultAction" method="addResultForm">
+            <result name="success">AddResult.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="createResult" class="com.myapp.struts.ResultAction" method="createResult">
+            <result name="success" type="redirect">results.action</result>
+            <result name="input">AddResult.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="updateResultForm" class="com.myapp.struts.ResultAction" method="getResultDetails">
+            <result name="success">UpdateResult.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="updateResult" class="com.myapp.struts.ResultAction" method="updateResult">
+            <result name="success" type="redirect">results.action</result>
+            <result name="input">UpdateResult.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="deleteResultConfirm" class="com.myapp.struts.ResultAction" method="getResultDetails">
+            <result name="success">DeleteResult.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="deleteResult" class="com.myapp.struts.ResultAction" method="deleteResult">
+            <result name="success" type="redirect">results.action</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="getResult" class="com.myapp.struts.ResultAction" method="getResultDetails">
+            <result name="success">GetResult.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="searchResults" class="com.myapp.struts.ResultAction" method="searchResults">
+            <result name="success">SearchResult.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+       
     </package>
 </struts>

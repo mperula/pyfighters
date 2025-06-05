@@ -10,31 +10,27 @@ import com.myapp.struts.model.Match;
 import com.opensymphony.xwork2.ActionSupport;
 
 import java.sql.Connection;
-import java.util.List;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class MatchAction extends ActionSupport {
 
-    private Match match;
-    private List<Match> matches;
     private int matchId;
+    private int fighter1Id;
+    private int fighter2Id;
+    private int arenaId;
+    private String result;
+    private String date;
 
-    // Getters y Setters
-    public Match getMatch() {
-        return match;
-    }
+    private List<Match> matches;
+    private Match match;
 
-    public void setMatch(Match match) {
-        this.match = match;
-    }
+    private Map<Integer, String> fighterOptions;
+    private Map<Integer, String> arenaOptions;
 
-    public List<Match> getMatches() {
-        return matches;
-    }
-
-    public void setMatches(List<Match> matches) {
-        this.matches = matches;
-    }
-
+    // Getters y setters
     public int getMatchId() {
         return matchId;
     }
@@ -43,78 +39,195 @@ public class MatchAction extends ActionSupport {
         this.matchId = matchId;
     }
 
-    // Listar todos los combates
+    public int getFighter1Id() {
+        return fighter1Id;
+    }
+
+    public void setFighter1Id(int fighter1Id) {
+        this.fighter1Id = fighter1Id;
+    }
+
+    public int getFighter2Id() {
+        return fighter2Id;
+    }
+
+    public void setFighter2Id(int fighter2Id) {
+        this.fighter2Id = fighter2Id;
+    }
+
+    public int getArenaId() {
+        return arenaId;
+    }
+
+    public void setArenaId(int arenaId) {
+        this.arenaId = arenaId;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public List<Match> getMatches() {
+        return matches;
+    }
+
+    public Match getMatch() {
+        return match;
+    }
+
+    public Map<Integer, String> getFighterOptions() {
+        return fighterOptions;
+    }
+
+    public Map<Integer, String> getArenaOptions() {
+        return arenaOptions;
+    }
+
+    // Métodos principales
     public String listMatches() {
         try (Connection conn = BaseDAO.getConnection()) {
-            MatchDAO matchDAO = new MatchDAO(conn);
-            matches = matchDAO.getAllMatches();
+            MatchDAO dao = new MatchDAO(conn);
+            matches = dao.getAllMatches();
             return SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
-            addActionError("Error al listar combates: " + e.getMessage());
+            addActionError("Error al listar combates.");
             return ERROR;
         }
     }
 
-    // Obtener detalles de un combate por ID
+    public String addMatchForm() {
+        loadOptions();
+        return SUCCESS;
+    }
+
+    public String createMatch() {
+        try (Connection conn = BaseDAO.getConnection()) {
+            Match m = new Match();
+            m.setFighter1Id(fighter1Id);
+            m.setFighter2Id(fighter2Id);
+            m.setArenaId(arenaId);
+            m.setResult(result);
+            m.setDate(java.sql.Date.valueOf(date));
+
+            MatchDAO dao = new MatchDAO(conn);
+            dao.createMatch(m);
+            return SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Error al crear combate.");
+            loadOptions();
+            return INPUT;
+        }
+    }
+
     public String getMatchDetails() {
         try (Connection conn = BaseDAO.getConnection()) {
-            MatchDAO matchDAO = new MatchDAO(conn);
-            match = matchDAO.getMatch(matchId);
+            MatchDAO dao = new MatchDAO(conn);
+            match = dao.getMatch(matchId);
             if (match != null) {
+                // Asignar valores para el formulario
+                fighter1Id = match.getFighter1Id();
+                fighter2Id = match.getFighter2Id();
+                arenaId = match.getArenaId();
+                result = match.getResult();
+                if (match.getDate() != null) {
+                    date = new SimpleDateFormat("yyyy-MM-dd").format(match.getDate());
+                }
+                loadOptions();
                 return SUCCESS;
             } else {
-                addActionError("No se encontró el combate con el ID proporcionado.");
+                addActionError("Combate no encontrado.");
                 return ERROR;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            addActionError("Error al obtener detalles del combate: " + e.getMessage());
+            addActionError("Error al cargar datos del combate.");
             return ERROR;
         }
     }
 
-    // Crear nuevo combate
-    public String createMatch() {
-        try (Connection conn = BaseDAO.getConnection()) {
-            MatchDAO matchDAO = new MatchDAO(conn);
-            matchDAO.createMatch(match);
-            return SUCCESS;
-        } catch (Exception e) {
-            e.printStackTrace();
-            addActionError("Error al crear combate: " + e.getMessage());
-            return ERROR;
-        }
-    }
-
-    // Actualizar un combate existente
     public String updateMatch() {
         try (Connection conn = BaseDAO.getConnection()) {
-            MatchDAO matchDAO = new MatchDAO(conn);
-            matchDAO.updateMatch(match);
+            Match m = new Match();
+            m.setMatchId(matchId);
+            m.setFighter1Id(fighter1Id);
+            m.setFighter2Id(fighter2Id);
+            m.setArenaId(arenaId);
+            m.setResult(result);
+            m.setDate(java.sql.Date.valueOf(date));
+
+            MatchDAO dao = new MatchDAO(conn);
+            dao.updateMatch(m);
             return SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
-            addActionError("Error al actualizar combate: " + e.getMessage());
-            return ERROR;
+            addActionError("Error al actualizar combate.");
+            loadOptions();
+            return INPUT;
         }
     }
 
-    // Eliminar un combate
     public String deleteMatch() {
         try (Connection conn = BaseDAO.getConnection()) {
-            MatchDAO matchDAO = new MatchDAO(conn);
-            matchDAO.deleteMatch(match.getMatchId());
+            MatchDAO dao = new MatchDAO(conn);
+            dao.deleteMatch(matchId);
             return SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
-            addActionError("Error al eliminar combate: " + e.getMessage());
+            addActionError("Error al eliminar combate.");
             return ERROR;
         }
     }
 
-    // Método para buscar un combate por ID (igual que getMatchDetails, pero más semántico)
     public String getMatchById() {
         return getMatchDetails();
+    }
+
+    public String deleteMatchConfirm() {
+        return getMatchDetails();
+    }
+
+    public String updateMatchForm() {
+        return getMatchDetails();
+    }
+
+    // Carga de opciones para selects
+    private void loadOptions() {
+        fighterOptions = new LinkedHashMap<>();
+        arenaOptions = new LinkedHashMap<>();
+
+        try (Connection conn = BaseDAO.getConnection()) {
+            String sqlFighters = "SELECT fighter_id, username FROM Fighters";
+            try (PreparedStatement stmt = conn.prepareStatement(sqlFighters);
+                    ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    fighterOptions.put(rs.getInt("fighter_id"), rs.getString("username"));
+                }
+            }
+
+            String sqlArenas = "SELECT arena_id, name FROM Arenas";
+            try (PreparedStatement stmt = conn.prepareStatement(sqlArenas);
+                    ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    arenaOptions.put(rs.getInt("arena_id"), rs.getString("name"));
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

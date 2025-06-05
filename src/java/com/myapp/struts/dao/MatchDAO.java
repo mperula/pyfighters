@@ -5,22 +5,23 @@
 package com.myapp.struts.dao;
 
 import com.myapp.struts.model.Match;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MatchDAO extends BaseDAO {
+public class MatchDAO {
 
-    private Connection conn;
+    private final Connection conn;
 
     public MatchDAO(Connection conn) {
         this.conn = conn;
     }
 
+    // Obtener todos los combates (con nombres descriptivos)
     public List<Match> getAllMatches() throws SQLException {
         List<Match> matches = new ArrayList<>();
-        String sql
-                = "SELECT m.match_id, m.result, m.date, "
+        String sql = "SELECT m.match_id, m.result, m.date, "
                 + "       f1.username AS fighter1_name, "
                 + "       f2.username AS fighter2_name, "
                 + "       a.name AS arena_name "
@@ -47,10 +48,12 @@ public class MatchDAO extends BaseDAO {
         return matches;
     }
 
+    // Obtener detalles completos por ID
     public Match getMatch(int matchId) throws SQLException {
-        String sql
-                = "SELECT m.match_id, m.result, m.date, m.fighter1_id, m.fighter2_id, m.arena_id, "
-                + "       f1.username AS fighter1_name, f2.username AS fighter2_name, a.name AS arena_name "
+        String sql = "SELECT m.match_id, m.result, m.date, m.fighter1_id, m.fighter2_id, m.arena_id, "
+                + "       f1.username AS fighter1_name, "
+                + "       f2.username AS fighter2_name, "
+                + "       a.name AS arena_name "
                 + "FROM Matches m "
                 + "JOIN Fighters f1 ON m.fighter1_id = f1.fighter_id "
                 + "JOIN Fighters f2 ON m.fighter2_id = f2.fighter_id "
@@ -78,8 +81,10 @@ public class MatchDAO extends BaseDAO {
         return null;
     }
 
+    // Insertar un nuevo combate
     public void createMatch(Match match) throws SQLException {
-        String sql = "INSERT INTO Matches (fighter1_id, fighter2_id, arena_id, result, date) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Matches (fighter1_id, fighter2_id, arena_id, result, date) "
+                + "VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, match.getFighter1Id());
             stmt.setInt(2, match.getFighter2Id());
@@ -90,8 +95,10 @@ public class MatchDAO extends BaseDAO {
         }
     }
 
+    // Actualizar un combate existente
     public void updateMatch(Match match) throws SQLException {
-        String sql = "UPDATE Matches SET fighter1_id = ?, fighter2_id = ?, arena_id = ?, result = ?, date = ? WHERE match_id = ?";
+        String sql = "UPDATE Matches SET fighter1_id = ?, fighter2_id = ?, arena_id = ?, result = ?, date = ? "
+                + "WHERE match_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, match.getFighter1Id());
             stmt.setInt(2, match.getFighter2Id());
@@ -103,21 +110,12 @@ public class MatchDAO extends BaseDAO {
         }
     }
 
+    // Eliminar un combate
     public void deleteMatch(int matchId) throws SQLException {
         String sql = "DELETE FROM Matches WHERE match_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, matchId);
             stmt.executeUpdate();
         }
-    }
-
-    // Métodos de búsqueda y lista alternativa (si algún día los necesitas)
-    public List<Match> listMatches() throws SQLException {
-        return getAllMatches();
-    }
-
-    public List<Match> searchMatches(String fecha, Integer fighter1Id, Integer fighter2Id) throws SQLException {
-        // Este método queda como extensible
-        return new ArrayList<>();
     }
 }

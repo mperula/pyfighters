@@ -18,14 +18,15 @@
         <div class="content">
             <h1>Eliminar Combate</h1>
             <p>¿Estás seguro de que deseas eliminar el siguiente combate?</p>
-            <p><strong>ID:</strong> <s:property value="match.matchId"/></p>
-            <p><strong>Luchador 1:</strong> <s:property value="match.fighter1Name"/></p>
-            <p><strong>Luchador 2:</strong> <s:property value="match.fighter2Name"/></p>
-            <p><strong>Arena:</strong> <s:property value="match.arenaName"/></p>
-            <p><strong>Resultado:</strong> <s:property value="match.result"/></p>
-            <p><strong>Fecha:</strong> <s:property value="match.date"/></p>
+            <p><strong>ID:</strong> <s:property value="matchId"/></p>
+            <p><strong>Luchador 1:</strong> <s:property value="fighter1Id"/></p>
+            <p><strong>Luchador 2:</strong> <s:property value="fighter2Id"/></p>
+            <p><strong>Arena:</strong> <s:property value="arenaId"/></p>
+            <p><strong>Resultado:</strong> <s:property value="result"/></p>
+            <p><strong>Fecha:</strong> <s:property value="date"/></p>
+
             <s:form action="deleteMatch" method="post">
-                <s:hidden name="match.matchId"/>
+                <s:hidden name="matchId" value="%{matchId}" />
                 <s:submit value="Confirmar Eliminación"/>
             </s:form>
             <a href="matches.action">Cancelar</a>
