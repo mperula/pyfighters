@@ -33,10 +33,9 @@
         <div class="accordion-item">
             <button class="accordion-toggle">🏟️ Arenas y Desafíos</button>
             <div class="accordion-content">
-                <a href="#">Crear Arena</a>
-                <a href="#">Listar Arenas</a>
-                <a href="#">Editar/Eliminar Arena</a>
-                <a href="#">Desafíos Especiales</a>
+                <a href="mostrarCrearArena.action">Crear Arena</a>
+                <a href="listArenas.action">Listar Arenas</a>
+                
             </div>
         </div>
 
