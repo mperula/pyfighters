@@ -154,3 +154,58 @@ body.login-page {
     text-align: center;
     margin-left: 230px; /* espacio lateral para el menú */
 }
+.arena-form {
+    max-width: 700px;
+    margin: 50px auto;
+    background-color: #161b22;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #ffd43b66;
+    color: #f0f6fc;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.form-row label {
+    width: 160px;
+    text-align: right;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.form-row input[type="text"],
+.form-row textarea {
+    flex: 1;
+    padding: 10px;
+    background-color: #0d1117;
+    color: #f0f6fc;
+    border: 1px solid #30363d;
+    border-radius: 5px;
+}
+
+.form-row textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+.submit-button {
+    background-color: #ffd43b;
+    color: #000;
+    border: none;
+    padding: 10px 25px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    align-self: center;
+}
+
+.submit-button:hover {
+    background-color: #ffdd55;
+}
