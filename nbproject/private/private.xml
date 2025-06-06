@@ -3,9 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/migue/Desktop/pyfighters/src/java/com/myapp/struts/CrearArenaAction.java</file>
-            <file>file:/C:/Users/migue/Desktop/pyfighters/web/crear_arena.jsp</file>
-            <file>file:/C:/Users/migue/Desktop/pyfighters/src/java/struts.xml</file>
+            <file>file:/C:/GitHub/pyfighters/src/java/com/myapp/struts/MisScriptsAction.java</file>
+            <file>file:/C:/GitHub/pyfighters/web/menu.jsp</file>
+            <file>file:/C:/GitHub/pyfighters/src/java/com/myapp/struts/ActualizarPerfilAction.java</file>
+            <file>file:/C:/GitHub/pyfighters/web/css/style.css</file>
+            <file>file:/C:/GitHub/pyfighters/web/misScripts.jsp</file>
+            <file>file:/C:/GitHub/pyfighters/src/java/com/myapp/struts/SubirScriptAction.java</file>
+            <file>file:/C:/GitHub/pyfighters/web/profile.jsp</file>
+            <file>file:/C:/GitHub/pyfighters/src/java/struts.xml</file>
+            <file>file:/C:/GitHub/pyfighters/src/java/com/myapp/struts/ActualizarScriptAction.java</file>
+            <file>file:/C:/GitHub/pyfighters/src/java/com/myapp/struts/dao/FighterDAO.java</file>
+            <file>file:/C:/GitHub/pyfighters/src/java/com/myapp/struts/model/Fighter.java</file>
+            <file>file:/C:/GitHub/pyfighters/src/java/com/myapp/struts/model/Script.java</file>
+            <file>file:/C:/GitHub/pyfighters/src/java/com/myapp/struts/ComunidadAction.java</file>
+            <file>file:/C:/GitHub/pyfighters/web/comunidad.jsp</file>
         </group>
     </open-files>
 </project-private>

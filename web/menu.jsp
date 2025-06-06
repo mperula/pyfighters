@@ -9,16 +9,16 @@
         <div class="accordion-item">
             <button class="accordion-toggle">🧑‍🚀 Fighters</button>
             <div class="accordion-content">
-                <a href="#">Registro</a>
-                <a href="#">Mi Perfil</a>
+                <a href="profile.action">Mi perfil</a>
+                <a href="comunidad.action">Comunidad</a>
             </div>
         </div>
 
         <div class="accordion-item">
             <button class="accordion-toggle">📜 Scripts</button>
             <div class="accordion-content">
-                <a href="#">Subir Script</a>
-                <a href="#">Gestionar Scripts</a>
+                <a href="misScripts.action">Mis Scripts</a>
+                <a href="#">Scripts Globales</a>
             </div>
         </div>
 
@@ -35,7 +35,7 @@
             <div class="accordion-content">
                 <a href="mostrarCrearArena.action">Crear Arena</a>
                 <a href="listArenas.action">Listar Arenas</a>
-                
+
             </div>
         </div>
 

@@ -47,6 +47,49 @@
             <result name="input">editar_arena.jsp</result>
             <result name="error">editar_arena.jsp</result>
         </action>
+        
+        <action name="register" class="com.myapp.struts.RegisterAction">
+            <result name="login">login.jsp</result>
+            <result name="error">register.jsp</result>
+        </action>
+        
+        <action name="profile" class="com.myapp.struts.ProfileAction">
+            <result name="success">profile.jsp</result>
+            <result name="error">login.jsp</result>
+        </action>
+
+        <action name="actualizarPerfil" class="com.myapp.struts.ActualizarPerfilAction">
+            <result name="success" type="redirectAction">profile</result>
+            <result name="error">profile.jsp</result>
+        </action>
+        
+        <action name="comunidad" class="com.myapp.struts.ComunidadAction">
+            <result name="success">comunidad.jsp</result>
+        </action>
+        
+        <action name="misScripts" class="com.myapp.struts.MisScriptsAction">
+            <result name="success">misScripts.jsp</result>
+            <result name="error">errorPage.jsp</result>
+        </action>
+        
+        <action name="actualizarScript" class="com.myapp.struts.ActualizarScriptAction">
+            <result name="success" type="redirectAction">misScripts</result>
+            <result name="error">errorPage.jsp</result>
+        </action>
+        
+        <action name="subirScript" class="com.myapp.struts.SubirScriptAction">
+            <result name="success" type="redirectAction">misScripts</result>
+            <result name="error">errorPage.jsp</result>
+        </action>
+        
+        <action name="descargarScript" class="com.myapp.struts.DescargarScriptAction">
+            <result name="success" type="stream">
+                <param name="contentType">text/plain</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>
+            </result>
+            <result name="error">errorPage.jsp</result>
+        </action>
 
     </package>
 </struts>

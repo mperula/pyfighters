@@ -1,4 +1,4 @@
-body { 
+body {
     font-family: 'Segoe UI', sans-serif;
     background-color: #0d1117;
     color: #f0f6fc;
@@ -101,7 +101,7 @@ h1, h2, h3 {
     margin-right: 6px;
 }
 
-/* Página login - estilo centrado */
+/* Página login */
 body.login-page {
     display: flex;
     justify-content: center;
@@ -152,8 +152,10 @@ body.login-page {
 .content {
     padding: 30px;
     text-align: center;
-    margin-left: 230px; /* espacio lateral para el menú */
+    margin-left: 230px;
 }
+
+/* Formularios generales */
 .arena-form {
     max-width: 700px;
     margin: 50px auto;
@@ -170,7 +172,9 @@ body.login-page {
 .form-row {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
+    margin-bottom: 15px;
 }
 
 .form-row label {
@@ -181,6 +185,7 @@ body.login-page {
 }
 
 .form-row input[type="text"],
+.form-row input[type="file"],
 .form-row textarea {
     flex: 1;
     padding: 10px;
@@ -190,9 +195,14 @@ body.login-page {
     border-radius: 5px;
 }
 
-.form-row textarea {
+textarea {
     resize: vertical;
     height: 100px;
+}
+
+.input-field {
+    width: 250px;
+    max-width: 100%;
 }
 
 .submit-button {
@@ -204,8 +214,161 @@ body.login-page {
     cursor: pointer;
     border-radius: 5px;
     align-self: center;
+    transition: background-color 0.2s ease;
+    min-width: 100px;
 }
 
 .submit-button:hover {
+    background-color: #ffdd55;
+}
+
+/* Tabla de Comunidad y Scripts */
+.community-table {
+    max-width: 1000px;
+    margin: 30px auto;
+    border-radius: 14px;
+    overflow-x: auto;
+    background: linear-gradient(145deg, #0d1117, #161b22);
+    box-shadow: 0 0 25px rgba(255, 212, 59, 0.15);
+    border: 1px solid #30363d;
+}
+
+.community-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    color: #f0f6fc;
+}
+
+.community-table th,
+.community-table td {
+    padding: 16px 22px;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 1px solid #30363d;
+}
+
+.community-table th {
+    background-color: #0d1117;
+    color: #ffd43b;
+    font-size: 13px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #ffd43b66;
+    text-shadow: 0 0 6px #ffd43b22;
+}
+
+.community-table tbody tr {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.community-table tbody tr:hover {
+    background-color: #1c2128;
+    transform: scale(1.01);
+    box-shadow: inset 0 0 10px rgba(255, 212, 59, 0.1);
+}
+
+.community-table tbody tr:nth-child(even) {
+    background-color: #151a20;
+}
+
+.community-table td:first-child {
+    font-weight: bold;
+    color: #58a6ff;
+}
+
+.community-table td:nth-child(2) {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.top-player {
+    color: #ffd700;
+    font-weight: bold;
+    text-shadow: 0 0 8px #ffd700cc;
+    letter-spacing: 0.5px;
+}
+
+.top-player::after {
+    content: " 👑";
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Subida de script */
+.upload-script-form {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: #161b22;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #ffd43b66;
+}
+
+.script-upload-form .form-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.script-upload-form label {
+    font-weight: bold;
+    color: #ffd43b;
+    min-width: 120px;
+    text-align: right;
+}
+
+.script-upload-form input[type="text"],
+.script-upload-form input[type="file"] {
+    flex: 1;
+    padding: 10px;
+    background-color: #0d1117;
+    color: #f0f6fc;
+    border: 1px solid #30363d;
+    border-radius: 5px;
+}
+
+.form-group-centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.upload-script-form .input-field {
+    width: 80%;
+    max-width: 300px;
+    padding: 10px;
+    background-color: #0d1117;
+    color: #f0f6fc;
+    border: 1px solid #30363d;
+    border-radius: 5px;
+}
+
+.upload-script-form .submit-button {
+    background-color: #ffd43b;
+    color: #000;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.upload-script-form .submit-button:hover {
     background-color: #ffdd55;
 }
