@@ -1,7 +1,3 @@
-/**
- *
- * @author pablo
- */
 package com.myapp.struts.model;
 
 import java.sql.Timestamp;
@@ -19,7 +15,6 @@ public class Result {
     private String winnerName;
     private String loserName;
 
-    // Getters y setters
     public int getResultId() {
         return resultId;
     }

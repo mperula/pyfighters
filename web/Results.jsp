@@ -72,7 +72,6 @@
             </s:else>
 
             <br/>
-            <a href="addResultForm.action">Crear nuevo resultado</a>
         </div>
     </body>
 </html>

@@ -1,7 +1,3 @@
-/**
- *
- * @author pablo
- */
 package com.myapp.struts.model;
 
 import java.sql.Timestamp;
@@ -18,12 +14,10 @@ public class Match {
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
-    // Estos se usan solo para mostrar nombres en lugar de IDs
     private String fighter1Name;
     private String fighter2Name;
     private String arenaName;
 
-    // === Getters y Setters ===
     public int getMatchId() {
         return matchId;
     }

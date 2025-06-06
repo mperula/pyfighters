@@ -1,7 +1,3 @@
-/**
- *
- * @author pablo
- */
 package com.myapp.struts.dao;
 
 import com.myapp.struts.model.Match;
@@ -18,7 +14,6 @@ public class MatchDAO {
         this.conn = conn;
     }
 
-    // Obtener todos los combates (con nombres descriptivos)
     public List<Match> getAllMatches() throws SQLException {
         List<Match> matches = new ArrayList<>();
         String sql = "SELECT m.match_id, m.result, m.date, "
@@ -48,7 +43,6 @@ public class MatchDAO {
         return matches;
     }
 
-    // Obtener detalles completos por ID
     public Match getMatch(int matchId) throws SQLException {
         String sql = "SELECT m.match_id, m.result, m.date, m.fighter1_id, m.fighter2_id, m.arena_id, "
                 + "       f1.username AS fighter1_name, "
@@ -81,7 +75,6 @@ public class MatchDAO {
         return null;
     }
 
-    // Insertar un nuevo combate
     public int createMatch(Match match) throws SQLException {
         String sql = "INSERT INTO Matches (fighter1_id, fighter2_id, arena_id, result, date) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -99,10 +92,9 @@ public class MatchDAO {
                 }
             }
         }
-        return -1; // Error
+        return -1;
     }
 
-    // Actualizar un combate existente
     public void updateMatch(Match match) throws SQLException {
         String sql = "UPDATE Matches SET fighter1_id = ?, fighter2_id = ?, arena_id = ?, result = ?, date = ? "
                 + "WHERE match_id = ?";
@@ -117,7 +109,6 @@ public class MatchDAO {
         }
     }
 
-    // Eliminar un combate
     public void deleteMatch(int matchId) throws SQLException {
         String sql = "DELETE FROM Matches WHERE match_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {

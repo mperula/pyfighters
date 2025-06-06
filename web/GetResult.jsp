@@ -1,7 +1,3 @@
-<%-- 
-    Author     : pablo
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ include file="menu.jsp" %>
@@ -10,6 +6,8 @@
     <head>
         <title>Detalles del Resultado</title>
         <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/match.css" />
+
     </head>
     <body>
         <div class="content">

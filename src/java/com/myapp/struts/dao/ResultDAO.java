@@ -1,7 +1,3 @@
-/**
- *
- * @author pablo
- */
 package com.myapp.struts.dao;
 
 import com.myapp.struts.model.Result;
@@ -60,7 +56,7 @@ public class ResultDAO extends BaseDAO {
                 stmt.setNull(2, Types.INTEGER);
             }
 
-            stmt.setInt(3, result.getIsDraw());  // Aquí corregido
+            stmt.setInt(3, result.getIsDraw());
             stmt.setInt(4, result.getResultId());
             stmt.executeUpdate();
         }
@@ -84,12 +80,29 @@ public class ResultDAO extends BaseDAO {
             stmt.setInt(1, resultId);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
+                    return extractResultFromResultSet(rs);
+                }
+            }
+        }
+        return null;
+    }
+
+    public Result getResultByMatchId(int matchId) throws SQLException {
+        String sql = "SELECT r.*, fw.username AS winner_name, fl.username AS loser_name "
+                + "FROM Results r "
+                + "LEFT JOIN Fighters fw ON r.winner_id = fw.fighter_id "
+                + "LEFT JOIN Fighters fl ON r.loser_id = fl.fighter_id "
+                + "WHERE r.match_id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, matchId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
                     Result r = new Result();
                     r.setResultId(rs.getInt("result_id"));
                     r.setMatchId(rs.getInt("match_id"));
                     r.setWinnerId(rs.getInt("winner_id"));
                     r.setLoserId(rs.getInt("loser_id"));
-                    r.setDraw(rs.getInt("is_draw"));  // Aquí corregido
+                    r.setDraw(rs.getInt("is_draw"));
                     r.setCreatedAt(rs.getTimestamp("created_at"));
                     r.setUpdatedAt(rs.getTimestamp("updated_at"));
                     r.setWinnerName(rs.getString("winner_name"));
@@ -112,63 +125,24 @@ public class ResultDAO extends BaseDAO {
         try (PreparedStatement stmt = conn.prepareStatement(sql);
                 ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                Result r = new Result();
-                r.setResultId(rs.getInt("result_id"));
-                r.setMatchId(rs.getInt("match_id"));
-                r.setWinnerId(rs.getInt("winner_id"));
-                r.setLoserId(rs.getInt("loser_id"));
-                r.setDraw(rs.getInt("is_draw"));  // Aquí corregido
-                r.setCreatedAt(rs.getTimestamp("created_at"));
-                r.setUpdatedAt(rs.getTimestamp("updated_at"));
-                r.setWinnerName(rs.getString("winner_name"));
-                r.setLoserName(rs.getString("loser_name"));
-                results.add(r);
+                results.add(extractResultFromResultSet(rs));
             }
         }
         return results;
     }
 
-    public List<Result> searchResults(Integer fighterId, Integer arenaId) throws SQLException {
-        List<Result> results = new ArrayList<>();
-        StringBuilder sql = new StringBuilder(
-                "SELECT r.*, fw.username AS winner_name, fl.username AS loser_name "
-                + "FROM Results r "
-                + "LEFT JOIN Fighters fw ON r.winner_id = fw.fighter_id "
-                + "LEFT JOIN Fighters fl ON r.loser_id = fl.fighter_id "
-                + "JOIN Matches m ON r.match_id = m.match_id WHERE 1=1 "
-        );
-
-        List<Object> params = new ArrayList<>();
-        if (fighterId != null) {
-            sql.append("AND (r.winner_id = ? OR r.loser_id = ?) ");
-            params.add(fighterId);
-            params.add(fighterId);
-        }
-        if (arenaId != null) {
-            sql.append("AND m.arena_id = ? ");
-            params.add(arenaId);
-        }
-
-        try (PreparedStatement stmt = conn.prepareStatement(sql.toString())) {
-            for (int i = 0; i < params.size(); i++) {
-                stmt.setObject(i + 1, params.get(i));
-            }
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    Result r = new Result();
-                    r.setResultId(rs.getInt("result_id"));
-                    r.setMatchId(rs.getInt("match_id"));
-                    r.setWinnerId(rs.getInt("winner_id"));
-                    r.setLoserId(rs.getInt("loser_id"));
-                    r.setDraw(rs.getInt("is_draw"));  // Aquí corregido
-                    r.setCreatedAt(rs.getTimestamp("created_at"));
-                    r.setUpdatedAt(rs.getTimestamp("updated_at"));
-                    r.setWinnerName(rs.getString("winner_name"));
-                    r.setLoserName(rs.getString("loser_name"));
-                    results.add(r);
-                }
-            }
-        }
-        return results;
+    private Result extractResultFromResultSet(ResultSet rs) throws SQLException {
+        Result r = new Result();
+        r.setResultId(rs.getInt("result_id"));
+        r.setMatchId(rs.getInt("match_id"));
+        r.setWinnerId(rs.getInt("winner_id"));
+        r.setLoserId(rs.getInt("loser_id"));
+        r.setDraw(rs.getInt("is_draw"));
+        r.setCreatedAt(rs.getTimestamp("created_at"));
+        r.setUpdatedAt(rs.getTimestamp("updated_at"));
+        r.setWinnerName(rs.getString("winner_name"));
+        r.setLoserName(rs.getString("loser_name"));
+        return r;
     }
+
 }

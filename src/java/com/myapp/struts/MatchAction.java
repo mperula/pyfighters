@@ -1,7 +1,3 @@
-/**
- *
- * @author pablo
- */
 package com.myapp.struts;
 
 import com.myapp.struts.dao.BaseDAO;
@@ -31,7 +27,6 @@ public class MatchAction extends ActionSupport {
     private Map<Integer, String> fighterOptions;
     private Map<Integer, String> arenaOptions;
 
-    // Getters y setters
     public int getMatchId() {
         return matchId;
     }
@@ -96,7 +91,6 @@ public class MatchAction extends ActionSupport {
         return arenaOptions;
     }
 
-    // Métodos principales
     public String listMatches() {
         try (Connection conn = BaseDAO.getConnection()) {
             MatchDAO dao = new MatchDAO(conn);
@@ -127,7 +121,6 @@ public class MatchAction extends ActionSupport {
 
             int generatedMatchId = dao.createMatch(m);
 
-            // Si se ha creado el match correctamente y se ha definido resultado
             if (generatedMatchId > 0 && result != null && !result.isEmpty()) {
                 com.myapp.struts.model.Result r = new com.myapp.struts.model.Result();
                 r.setMatchId(generatedMatchId);
@@ -141,9 +134,9 @@ public class MatchAction extends ActionSupport {
                     r.setLoserId(fighter1Id);
                     r.setDraw(0);
                 } else if ("X".equalsIgnoreCase(result)) {
-                    r.setWinnerId(0); // No hay ganador
-                    r.setLoserId(0);  // No hay perdedor
-                    r.setDraw(1);     // Es empate
+                    r.setWinnerId(0);
+                    r.setLoserId(0);
+                    r.setDraw(1);
                 }
 
                 ResultDAO resultDAO = new ResultDAO(conn);
@@ -164,7 +157,6 @@ public class MatchAction extends ActionSupport {
             MatchDAO dao = new MatchDAO(conn);
             match = dao.getMatch(matchId);
             if (match != null) {
-                // Asignar valores para el formulario
                 fighter1Id = match.getFighter1Id();
                 fighter2Id = match.getFighter2Id();
                 arenaId = match.getArenaId();
@@ -230,7 +222,6 @@ public class MatchAction extends ActionSupport {
         return getMatchDetails();
     }
 
-    // Carga de opciones para selects
     private void loadOptions() {
         fighterOptions = new LinkedHashMap<>();
         arenaOptions = new LinkedHashMap<>();

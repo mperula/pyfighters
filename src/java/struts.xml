@@ -71,16 +71,6 @@ and open the template in the editor.
             <result name="error">error.jsp</result>
         </action>
 
-        <action name="addResultForm" class="com.myapp.struts.ResultAction" method="addResultForm">
-            <result name="success">AddResult.jsp</result>
-            <result name="error">error.jsp</result>
-        </action>
-
-        <action name="createResult" class="com.myapp.struts.ResultAction" method="createResult">
-            <result name="success" type="redirect">results.action</result>
-            <result name="input">AddResult.jsp</result>
-        </action>
-
         <action name="updateResultForm" class="com.myapp.struts.ResultAction" method="getResultDetails">
             <result name="success">UpdateResult.jsp</result>
             <result name="error">error.jsp</result>

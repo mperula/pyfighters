@@ -1,8 +1,3 @@
-<%-- 
-    Document   : SearchMatch
-    Created on : 04-jun-2025, 20:20:28
-    Author     : pablo
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s" %>

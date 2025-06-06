@@ -47,7 +47,6 @@
                 <a href="addMatchForm.action">Crear Combate</a>
                 <a href="getMatchById.action">Buscar Combate</a>
                 <a href="results.action">Ver Resultados</a>
-                <a href="addResultForm.action">Crear Resultado</a>
                 <a href="searchResults.action">Buscar Resultado</a>
             </div>
         </div>

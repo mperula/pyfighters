@@ -1,8 +1,3 @@
-<%-- 
-    Document   : DeleteMatch
-    Created on : 04-jun-2025, 20:17:55
-    Author     : pablo
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
