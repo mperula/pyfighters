@@ -40,12 +40,16 @@
         </div>
 
         <div class="accordion-item">
-            <button class="accordion-toggle">⚔️ Matches</button>
+            <button class="accordion-toggle">⚔️ Matches y Results</button>
             <div class="accordion-content">
-                <a href="#">Crear Combate</a>
-                <a href="#">Resultados</a>
+                <a href="matches.action">Ver todos los Combates</a>
+                <a href="addMatchForm.action">Crear Combate</a>
+                <a href="getMatchById.action">Buscar Combate</a>
+                <a href="results.action">Ver Resultados</a>
+                <a href="searchResults.action">Buscar Resultado</a>
             </div>
         </div>
+
 
         <div class="accordion-item">
             <button class="accordion-toggle">🏆 Torneos</button>
