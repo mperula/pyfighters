@@ -1,5 +1,6 @@
 package com.myapp.struts.dao;
 
+import com.myapp.struts.model.Match;
 import com.myapp.struts.model.Result;
 
 import java.sql.*;
@@ -63,10 +64,27 @@ public class ResultDAO extends BaseDAO {
     }
 
     public void deleteResult(int resultId) throws SQLException {
-        String sql = "DELETE FROM Results WHERE result_id = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        int matchId = -1;
+
+        String selectSql = "SELECT match_id FROM Results WHERE result_id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(selectSql)) {
+            stmt.setInt(1, resultId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    matchId = rs.getInt("match_id");
+                }
+            }
+        }
+
+        String deleteSql = "DELETE FROM Results WHERE result_id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(deleteSql)) {
             stmt.setInt(1, resultId);
             stmt.executeUpdate();
+        }
+
+        if (matchId != -1) {
+            MatchDAO matchDAO = new MatchDAO(conn);
+            matchDAO.clearResultId(matchId);
         }
     }
 

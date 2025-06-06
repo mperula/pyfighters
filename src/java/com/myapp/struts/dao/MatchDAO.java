@@ -124,4 +124,12 @@ public class MatchDAO {
             stmt.executeUpdate();
         }
     }
+
+    public void clearResultId(int matchId) throws SQLException {
+        String sql = "UPDATE Matches SET result_id = NULL WHERE match_id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, matchId);
+            stmt.executeUpdate();
+        }
+    }
 }

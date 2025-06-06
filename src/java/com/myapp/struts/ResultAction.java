@@ -6,8 +6,12 @@ import com.myapp.struts.model.Result;
 import com.opensymphony.xwork2.ActionSupport;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ResultAction extends ActionSupport {
 
@@ -19,6 +23,11 @@ public class ResultAction extends ActionSupport {
 
     private List<Result> results = new ArrayList<>();
     private Result result;
+    private List<Map<String, String>> fighterOptions = new ArrayList<>();
+
+    public List<Map<String, String>> getFighterOptions() {
+        return fighterOptions;
+    }
 
     public int getResultId() {
         return resultId;
@@ -112,6 +121,27 @@ public class ResultAction extends ActionSupport {
         try (Connection conn = BaseDAO.getConnection()) {
             ResultDAO dao = new ResultDAO(conn);
             result = dao.getResult(resultId);
+
+            if (result != null) {
+                matchId = result.getMatchId();
+                winnerId = result.getWinnerId();
+                loserId = result.getLoserId();
+                draw = result.getIsDraw();
+            }
+
+            // Cargar opciones de luchadores SIN crear clases nuevas
+            fighterOptions.clear();
+            String sql = "SELECT fighter_id, username FROM Fighters ORDER BY username ASC";
+            try (PreparedStatement stmt = conn.prepareStatement(sql);
+                    ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Map<String, String> option = new HashMap<>();
+                    option.put("key", String.valueOf(rs.getInt("fighter_id")));
+                    option.put("value", rs.getString("username"));
+                    fighterOptions.add(option);
+                }
+            }
+
             return SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
@@ -123,4 +153,23 @@ public class ResultAction extends ActionSupport {
     public String deleteResultConfirm() {
         return getResultDetails();
     }
+
+    public String updateResult() {
+        try (Connection conn = BaseDAO.getConnection()) {
+            ResultDAO dao = new ResultDAO(conn);
+            Result updated = new Result();
+            updated.setResultId(resultId);
+            updated.setMatchId(matchId);
+            updated.setWinnerId(winnerId);
+            updated.setLoserId(loserId);
+            updated.setDraw(draw);
+            dao.updateResult(updated);
+            return SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Error al actualizar resultado.");
+            return ERROR;
+        }
+    }
+
 }

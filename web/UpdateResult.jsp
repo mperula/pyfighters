@@ -7,6 +7,8 @@
     <head>
         <title>Editar Resultado</title>
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/match.css">
+
     </head>
     <body>
         <div class="content">
