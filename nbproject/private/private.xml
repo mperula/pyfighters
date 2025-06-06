@@ -3,16 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/pablo/Documents/GitHub/pyfighters/web/GetResult.jsp</file>
-            <file>file:/C:/Users/pablo/Documents/GitHub/pyfighters/web/GetMatch.jsp</file>
-            <file>file:/C:/Users/pablo/Documents/GitHub/pyfighters/web/DeleteMatch.jsp</file>
-            <file>file:/C:/Users/pablo/Documents/GitHub/pyfighters/web/AddMatch.jsp</file>
-            <file>file:/C:/Users/pablo/Documents/GitHub/pyfighters/web/UpdateMatch.jsp</file>
-            <file>file:/C:/Users/pablo/Documents/GitHub/pyfighters/web/SearchResult.jsp</file>
-            <file>file:/C:/Users/pablo/Documents/GitHub/pyfighters/web/SearchMatch.jsp</file>
-            <file>file:/C:/Users/pablo/Documents/GitHub/pyfighters/web/Results.jsp</file>
-            <file>file:/C:/Users/pablo/Documents/GitHub/pyfighters/web/Matches.jsp</file>
-            <file>file:/C:/Users/pablo/Documents/GitHub/pyfighters/web/DeleteResult.jsp</file>
+            <file>file:/C:/Users/migue/Desktop/pyfighters/src/java/com/myapp/struts/CrearArenaAction.java</file>
+            <file>file:/C:/Users/migue/Desktop/pyfighters/web/crear_arena.jsp</file>
+            <file>file:/C:/Users/migue/Desktop/pyfighters/src/java/struts.xml</file>
         </group>
     </open-files>
 </project-private>
