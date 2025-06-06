@@ -36,8 +36,91 @@
         <action name="mostrarMenu">
             <result name="success">menu.jsp</result>
         </action>
+        
+      
+        <action name="matches" class="com.myapp.struts.MatchAction" method="listMatches">
+            <result name="success">Matches.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
 
-        <!-- Editar Arena -->
+        <action name="getMatch" class="com.myapp.struts.MatchAction" method="getMatchDetails">
+            <result name="success">GetMatch.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="createMatch" class="com.myapp.struts.MatchAction" method="createMatch">
+            <result name="success" type="redirect">matches.action</result>
+            <result name="input">AddMatch.jsp</result> 
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="updateMatchForm" class="com.myapp.struts.MatchAction" method="getMatchDetails">
+            <result name="success">UpdateMatch.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="updateMatch" class="com.myapp.struts.MatchAction" method="updateMatch">
+            <result name="success" type="redirect">matches.action</result>
+            <result name="input">UpdateMatch.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+
+        <action name="deleteMatchConfirm" class="com.myapp.struts.MatchAction" method="getMatchDetails">
+            <result name="success">DeleteMatch.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="deleteMatch" class="com.myapp.struts.MatchAction" method="deleteMatch">
+            <result name="success" type="redirect">matches.action</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="getMatchById" class="com.myapp.struts.MatchAction" method="getMatchById">
+            <result name="success">SearchMatch.jsp</result>
+            <result name="error">SearchMatch.jsp</result>
+        </action>
+
+        <action name="addMatchForm" class="com.myapp.struts.MatchAction" method="addMatchForm">
+            <result name="success">AddMatch.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+        <action name="results" class="com.myapp.struts.ResultAction" method="listResults">
+            <result name="success">Results.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="updateResultForm" class="com.myapp.struts.ResultAction" method="getResultDetails">
+            <result name="success">UpdateResult.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="updateResult" class="com.myapp.struts.ResultAction" method="updateResult">
+            <result name="success" type="redirect">results.action</result>
+            <result name="input">UpdateResult.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="deleteResultConfirm" class="com.myapp.struts.ResultAction" method="getResultDetails">
+            <result name="success">/DeleteResult.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+
+        <action name="deleteResult" class="com.myapp.struts.ResultAction" method="deleteResult">
+            <result name="success" type="redirect">results.action</result>
+            <result name="error">/error.jsp</result>
+        </action>
+
+        <action name="getResult" class="com.myapp.struts.ResultAction" method="getResultDetails">
+            <result name="success">GetResult.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+
+        <action name="searchResults" class="com.myapp.struts.ResultAction" method="searchResults">
+            <result name="success">SearchResult.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+       
         <action name="mostrarEditarArena" class="com.myapp.struts.EditarArenaAction" method="mostrarFormulario">
             <result name="success">editar_arena.jsp</result>
             <result name="error">listarArenas.jsp</result>
@@ -47,6 +130,7 @@
             <result name="input">editar_arena.jsp</result>
             <result name="error">editar_arena.jsp</result>
         </action>
+
 
     </package>
 </struts>
