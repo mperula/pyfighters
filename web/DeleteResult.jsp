@@ -7,22 +7,32 @@
 <%@ include file="menu.jsp" %>
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Eliminar Resultado</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-</head>
-<body>
-    <div class="content">
-        <h1>Confirmar Eliminación</h1>
+    <head>
+        <title>Eliminar Resultado</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/match.css">
+    </head>
+    <body>
+        <div class="content">
+            <h1>Eliminar Resultado</h1>
 
-        <p>¿Estás seguro de que deseas eliminar el resultado del combate <strong><s:property value="result.matchId" /></strong>?</p>
+            <p>¿Estás seguro de que quieres eliminar este resultado?</p>
 
-        <s:form action="deleteResult" method="post">
-            <s:hidden name="result.resultId" />
-            <s:submit value="Sí, eliminar" />
-        </s:form>
+            <ul>
+                <li><strong>ID del Resultado:</strong> <s:property value="resultId" /></li>
+                <li><strong>ID del Combate:</strong> <s:property value="matchId" /></li>
+                <li><strong>Ganador:</strong> <s:property value="winnerName" default="Ninguno" /></li>
+                <li><strong>Perdedor:</strong> <s:property value="loserName" default="Ninguno" /></li>
+                <li><strong>Empate:</strong> <s:property value="isDraw == 1 ? 'Sí' : 'No'" /></li>
+            </ul>
 
-        <a href="results.action">Cancelar</a>
-    </div>
-</body>
+            <s:form action="deleteResult" method="post">
+                <s:hidden name="resultId" />
+                <s:submit value="Confirmar eliminación" />
+            </s:form>
+
+            <a href="results.action">Cancelar</a>
+        </div>
+    </body>
 </html>
+

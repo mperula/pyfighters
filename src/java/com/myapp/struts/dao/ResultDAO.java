@@ -22,19 +22,25 @@ public class ResultDAO extends BaseDAO {
         String sql = "INSERT INTO Results (match_id, winner_id, loser_id, is_draw) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, result.getMatchId());
-            if (result.getWinnerId() != 0) {
-                stmt.setInt(2, result.getWinnerId());
+
+            int winnerId = result.getWinnerId();
+            int loserId = result.getLoserId();
+
+            if (winnerId != 0) {
+                stmt.setInt(2, winnerId);
             } else {
                 stmt.setNull(2, Types.INTEGER);
             }
 
-            if (result.getLoserId() != 0) {
-                stmt.setInt(3, result.getLoserId());
+            if (loserId != 0) {
+                stmt.setInt(3, loserId);
             } else {
                 stmt.setNull(3, Types.INTEGER);
             }
 
-            stmt.setInt(4, result.isDraw());  // Aquí corregido: usamos setInt
+            int isDraw = (winnerId == 0 && loserId == 0) ? 1 : 0;
+            stmt.setInt(4, isDraw);
+
             stmt.executeUpdate();
         }
     }
@@ -54,7 +60,7 @@ public class ResultDAO extends BaseDAO {
                 stmt.setNull(2, Types.INTEGER);
             }
 
-            stmt.setInt(3, result.isDraw());  // Aquí corregido
+            stmt.setInt(3, result.getIsDraw());  // Aquí corregido
             stmt.setInt(4, result.getResultId());
             stmt.executeUpdate();
         }

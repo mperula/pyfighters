@@ -11,7 +11,6 @@
         <title>Lista de Resultados</title>
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/match.css">
-
     </head>
     <body>
         <div class="content">
@@ -35,10 +34,32 @@
                         <tr>
                             <td><s:property value="resultId" /></td>
                             <td><s:property value="matchId" /></td>
-                            <td><s:property value="winnerName" /></td>
-                            <td><s:property value="loserName" /></td>
+
                             <td>
-                                <s:property value="#this.isDraw == 1 ? 'Sí' : 'No'" />
+                                <s:if test="winnerName != null && winnerName.trim() != ''">
+                                    <s:property value="winnerName" />
+                                </s:if>
+                                <s:else>
+                                    Ninguno
+                                </s:else>
+                            </td>
+
+                            <td>
+                                <s:if test="loserName != null && loserName.trim() != ''">
+                                    <s:property value="loserName" />
+                                </s:if>
+                                <s:else>
+                                    Ninguno
+                                </s:else>
+                            </td>
+
+                            <td>
+                                <s:if test="isDraw == 1">
+                                    Sí
+                                </s:if>
+                                <s:else>
+                                    No
+                                </s:else>
                             </td>
 
                             <td>
@@ -55,3 +76,4 @@
         </div>
     </body>
 </html>
+

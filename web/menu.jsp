@@ -41,7 +41,7 @@
         </div>
 
         <div class="accordion-item">
-            <button class="accordion-toggle">⚔️ Matches</button>
+            <button class="accordion-toggle">⚔️ Matches y Results</button>
             <div class="accordion-content">
                 <a href="matches.action">Ver todos los Combates</a>
                 <a href="addMatchForm.action">Crear Combate</a>

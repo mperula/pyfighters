@@ -82,17 +82,24 @@ public class MatchDAO {
     }
 
     // Insertar un nuevo combate
-    public void createMatch(Match match) throws SQLException {
-        String sql = "INSERT INTO Matches (fighter1_id, fighter2_id, arena_id, result, date) "
-                + "VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+    public int createMatch(Match match) throws SQLException {
+        String sql = "INSERT INTO Matches (fighter1_id, fighter2_id, arena_id, result, date) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, match.getFighter1Id());
             stmt.setInt(2, match.getFighter2Id());
             stmt.setInt(3, match.getArenaId());
             stmt.setString(4, match.getResult());
             stmt.setDate(5, match.getDate());
+
             stmt.executeUpdate();
+
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
         }
+        return -1; // Error
     }
 
     // Actualizar un combate existente
@@ -113,6 +120,14 @@ public class MatchDAO {
     // Eliminar un combate
     public void deleteMatch(int matchId) throws SQLException {
         String sql = "DELETE FROM Matches WHERE match_id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, matchId);
+            stmt.executeUpdate();
+        }
+    }
+
+    public void clearResultField(int matchId) throws SQLException {
+        String sql = "UPDATE Matches SET result = NULL WHERE match_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, matchId);
             stmt.executeUpdate();

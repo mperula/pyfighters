@@ -52,7 +52,7 @@ public class Result {
         this.loserId = loserId;
     }
 
-    public int isDraw() {
+    public int getIsDraw() {
         return isDraw;
     }
 

@@ -6,6 +6,7 @@ package com.myapp.struts;
 
 import com.myapp.struts.dao.BaseDAO;
 import com.myapp.struts.dao.MatchDAO;
+import com.myapp.struts.dao.ResultDAO;
 import com.myapp.struts.model.Match;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -115,6 +116,8 @@ public class MatchAction extends ActionSupport {
 
     public String createMatch() {
         try (Connection conn = BaseDAO.getConnection()) {
+            MatchDAO dao = new MatchDAO(conn);
+
             Match m = new Match();
             m.setFighter1Id(fighter1Id);
             m.setFighter2Id(fighter2Id);
@@ -122,14 +125,37 @@ public class MatchAction extends ActionSupport {
             m.setResult(result);
             m.setDate(java.sql.Date.valueOf(date));
 
-            MatchDAO dao = new MatchDAO(conn);
-            dao.createMatch(m);
+            int generatedMatchId = dao.createMatch(m);
+
+            // Si se ha creado el match correctamente y se ha definido resultado
+            if (generatedMatchId > 0 && result != null && !result.isEmpty()) {
+                com.myapp.struts.model.Result r = new com.myapp.struts.model.Result();
+                r.setMatchId(generatedMatchId);
+
+                if ("1".equals(result)) {
+                    r.setWinnerId(fighter1Id);
+                    r.setLoserId(fighter2Id);
+                    r.setDraw(0);
+                } else if ("2".equals(result)) {
+                    r.setWinnerId(fighter2Id);
+                    r.setLoserId(fighter1Id);
+                    r.setDraw(0);
+                } else if ("X".equalsIgnoreCase(result)) {
+                    r.setWinnerId(0); // No hay ganador
+                    r.setLoserId(0);  // No hay perdedor
+                    r.setDraw(1);     // Es empate
+                }
+
+                ResultDAO resultDAO = new ResultDAO(conn);
+                resultDAO.createResult(r);
+            }
+
             return SUCCESS;
+
         } catch (Exception e) {
             e.printStackTrace();
-            addActionError("Error al crear combate.");
-            loadOptions();
-            return INPUT;
+            addActionError("Error al crear el combate: " + e.getMessage());
+            return ERROR;
         }
     }
 
