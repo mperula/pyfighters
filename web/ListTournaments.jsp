@@ -12,6 +12,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <s:iterator value="tournamentList">
+            <div class="tournament">
+                <h3><s:property value="name"/></h3>
+            <p>Fecha: <s:property value="startDate"/> a <s:property value="endDate"/></p>
+            </div>
+        </s:iterator>
     </body>
 </html>

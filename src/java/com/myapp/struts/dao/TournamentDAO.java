@@ -9,6 +9,13 @@ package com.myapp.struts.dao;
  *
  * @author pablouceda
  */
+
+import com.myapp.struts.model.Fighter;
+import com.myapp.struts.model.Script;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class TournamentDAO {
     
 }
