@@ -23,8 +23,8 @@ public class LoginAction extends ActionSupport {
 
     @Override
     public String execute() {
-        System.out.println("Email recibido: " + email);
-        System.out.println("Password recibido: " + password);
+        //System.out.println("Email recibido: " + email);
+        //System.out.println("Password recibido: " + password);
         user = FighterDAO.login(email, password);
         if (user != null) {
             //System.out.println("Login exitoso");

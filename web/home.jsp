@@ -3,7 +3,7 @@
 <%@ include file="menu.jsp" %>
 
 <div class="content">
-    <h1>¡Bienvenido, 👾<s:property value="user.username" />👾, a PhyFighter!</h1>
+    <h1>¡Bienvenido, 👾<s:property value="#session.usuario.username" />👾, a PhyFighter!</h1>
 
     <pre style="color: #58a6ff; font-size: 14px;">
 

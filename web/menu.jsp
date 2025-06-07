@@ -3,7 +3,9 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 
 <div class="sidebar">
-    <div class="menu-title">🐍 PyFighters</div>
+    <a href="home.jsp" class="menu-title" style="text-decoration: none;">
+        🐍 <strong>PyFighters</strong>
+    </a>
 
     <div class="accordion">
         <div class="accordion-item">
@@ -18,7 +20,7 @@
             <button class="accordion-toggle">📜 Scripts</button>
             <div class="accordion-content">
                 <a href="misScripts.action">Mis Scripts</a>
-                <a href="#">Scripts Globales</a>
+                <a href="scriptsGlobales.action">Scripts Globales</a>
             </div>
         </div>
 
@@ -61,7 +63,7 @@
     </div>
 
     <!-- Botón de cerrar sesión -->
-    <form action="logout" method="post" style="margin-top: auto;">
+    <form action="logout" method="post" style="margin-top: auto;" onsubmit="return confirm('¿Seguro que quieres cerrar sesión?')">
         <button type="submit" class="logout-button">🔓 Cerrar Sesión</button>
     </form>
 </div>
@@ -74,3 +76,4 @@
         });
     });
 </script>
+

@@ -35,7 +35,7 @@
                 </thead>
                 <tbody>
                     <s:iterator value="fighters" var="f" status="i">
-                        <tr>
+                        <tr class="<s:property value='#f.username == #session.usuario.username ? "highlight" : ""' />">
                             <td><s:property value="#f.fighter_id" /></td>
                             <td>
                                 <s:if test="#i.index == 0">

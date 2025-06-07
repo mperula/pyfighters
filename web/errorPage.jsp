@@ -6,7 +6,7 @@
     <title>Error</title>
 </head>
 <body>
-    <h1>Error al crear la arena</h1>
+    <h1>Error</h1>
     <p>Hubo un problema al procesar tu solicitud. Por favor, intenta de nuevo más tarde.</p>
 </body>
 </html>
