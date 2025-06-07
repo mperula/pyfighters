@@ -6,8 +6,8 @@
 package com.myapp.struts.dao;
 
 
-import com.myapp.struts.model.Fighter;
-import com.myapp.struts.model.Script;
+import com.myapp.struts.model.Achievement;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +19,7 @@ import java.util.List;
 public class AchievementDAO extends BaseDAO{
     private Connection connection;
 
-    public AchievementDAO() {
-        this.connection = DatabaseUtil.getConnection();
-    }
+    
 
     // Create
     public void createAchievement(Achievement achievement) throws SQLException {

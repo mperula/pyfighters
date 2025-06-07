@@ -18,9 +18,7 @@ import java.util.List;
 public class TournamentDAO extends BaseDAO{
     private Connection connection;
 
-    public TournamentDAO() {
-        this.connection = DatabaseUtil.getConnection();
-    }
+    
 
     // Create
     public void createTournament(Tournament tournament) throws SQLException {
