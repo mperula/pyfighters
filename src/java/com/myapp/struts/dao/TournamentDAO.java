@@ -6,8 +6,8 @@
 package com.myapp.struts.dao;
 
 
-import com.myapp.struts.model.Fighter;
-import com.myapp.struts.model.Script;
+import com.myapp.struts.model.Tournament;
+import com.myapp.struts.model.Achievement;
 import java.sql.*;
 
 
