@@ -173,6 +173,15 @@
             </result>
             <result name="error">errorPage.jsp</result>
         </action>
+        
+        <action name="tournaments" class="com.pyfighters.TournamentAction">
+            <result name="success">/WEB-INF/tournament/list-tournaments.jsp</result>
+        </action>
+
+        <action name="saveTournament" class="com.pyfighters.TournamentAction" method="save">
+            <result name="success" type="redirectAction">tournaments</result>
+        </action>
+
 
         <action name="scriptsGlobales" class="com.myapp.struts.ScriptsGlobalesAction">
             <result name="success">scriptsGlobales.jsp</result>
