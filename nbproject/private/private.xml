@@ -3,20 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/GitHub/pyfighters/src/java/com/myapp/struts/MisScriptsAction.java</file>
-            <file>file:/C:/GitHub/pyfighters/web/menu.jsp</file>
-            <file>file:/C:/GitHub/pyfighters/src/java/com/myapp/struts/ActualizarPerfilAction.java</file>
-            <file>file:/C:/GitHub/pyfighters/web/css/style.css</file>
-            <file>file:/C:/GitHub/pyfighters/web/misScripts.jsp</file>
-            <file>file:/C:/GitHub/pyfighters/src/java/com/myapp/struts/SubirScriptAction.java</file>
-            <file>file:/C:/GitHub/pyfighters/web/profile.jsp</file>
-            <file>file:/C:/GitHub/pyfighters/src/java/struts.xml</file>
-            <file>file:/C:/GitHub/pyfighters/src/java/com/myapp/struts/ActualizarScriptAction.java</file>
-            <file>file:/C:/GitHub/pyfighters/src/java/com/myapp/struts/dao/FighterDAO.java</file>
-            <file>file:/C:/GitHub/pyfighters/src/java/com/myapp/struts/model/Fighter.java</file>
-            <file>file:/C:/GitHub/pyfighters/src/java/com/myapp/struts/model/Script.java</file>
-            <file>file:/C:/GitHub/pyfighters/src/java/com/myapp/struts/ComunidadAction.java</file>
-            <file>file:/C:/GitHub/pyfighters/web/comunidad.jsp</file>
+            <file>file:/C:/Users/uceda/Documents/GitHub/pyfighters/src/java/struts.xml</file>
+            <file>file:/C:/Users/uceda/Documents/GitHub/pyfighters/web/createTournament.jsp</file>
+            <file>file:/C:/Users/uceda/Documents/GitHub/pyfighters/src/java/com/myapp/struts/dao/ArenaDAO.java</file>
+            <file>file:/C:/Users/uceda/Documents/GitHub/pyfighters/web/AddMatch.jsp</file>
+            <file>file:/C:/Users/uceda/Documents/GitHub/pyfighters/src/java/com/myapp/struts/dao/FighterDAO.java</file>
+            <file>file:/C:/Users/uceda/Documents/GitHub/pyfighters/src/java/com/myapp/struts/dao/AchievementDAO.java</file>
+            <file>file:/C:/Users/uceda/Documents/GitHub/pyfighters/web/Matches.jsp</file>
+            <file>file:/C:/Users/uceda/Documents/GitHub/pyfighters/web/ListTournaments.jsp</file>
+            <file>file:/C:/Users/uceda/Documents/GitHub/pyfighters/src/java/com/myapp/struts/model/Tournament.java</file>
+            <file>file:/C:/Users/uceda/Documents/GitHub/pyfighters/src/java/com/myapp/struts/dao/BaseDAO.java</file>
+            <file>file:/C:/Users/uceda/Documents/GitHub/pyfighters/src/java/com/myapp/struts/model/Achievement.java</file>
+            <file>file:/C:/Users/uceda/Documents/GitHub/pyfighters/src/java/com/myapp/struts/dao/TournamentDAO.java</file>
+            <file>file:/C:/Users/uceda/Documents/GitHub/pyfighters/src/java/com/myapp/struts/dao/MatchDAO.java</file>
+            <file>file:/C:/Users/uceda/Documents/GitHub/pyfighters/src/java/com/myapp/struts/model/Arena.java</file>
         </group>
     </open-files>
 </project-private>
